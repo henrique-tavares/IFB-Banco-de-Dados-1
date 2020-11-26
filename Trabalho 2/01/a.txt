@@ -1,0 +1,5 @@
+π nome, fone (
+    σ [Consultas.COD_AN = 654] (
+        Θ [Veterinários.CRMV = Consultas.CRMV] (Veterinários, Consultas)
+    )
+)

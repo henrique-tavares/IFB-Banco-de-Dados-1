@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath}
+
+\begin{document}
+
+\paragraph{5)} buscar o nome e a especialidade de todos os métodos
+\[
+    \{ t.nome, t.especialidade \ |\ M\acute{e}dico(t) \}
+\]
+
+\paragraph{6)} buscar o número dos ambulatórios do terceiro andar
+\[
+    \{ a.numeroA\ |\ Ambulat\acute{o}rio(a)\ AND\ a.andar = 3  \}
+\]
+
+\paragraph{7)} buscar o CRM dos médicos e as datas das consultas para os pacientes com RG 122 e 725
+\[
+    \{ c.CRM, c.data\ |\ Consulta(c)\ AND\ (c.RG = 122\ OR\ c.RG = 725) \}
+\]
+
+\paragraph{8)} buscar os números dos ambulatórios, exceto aqueles do segundo e quarto andares, que suportam mais de 50 pacientes
+\begin{align*}
+    \{ a.numeroA\ |\ & Ambulat\acute{o}rio(a)\ AND\ (NOT\ ((c.andar = 2\ OR\ c.andar = 4) \\
+    & AND\ c.capacidade \geq 50)) \}
+\end{align*}
+
+\paragraph{9)} buscar o nome dos médicos que têm consulta marcada e as datas das suas consultas
+\[
+    \{ m.nome, c.data\ |\ M\acute{e}dico(m)\ AND\ Consulta(c)\ AND\ m.CRM = c.CRM \}
+\]
+
+\paragraph{10)} buscar o número e a capacidade dos ambulatórios do quinto andar e o nome dos médicos que atendem neles
+\begin{align*}
+    \{ a.numeroA, a.capacidade, m.nome\ |\ & Ambulat\acute{o}rio(a)\ AND\ M\acute{e}dico(m)\ AND\\
+    & m.numeroA = a.numeroA\ AND\\
+    & a.andar = 5 \}
+\end{align*}
+
+\paragraph{11)} buscar os nomes dos médicos ortopedistas com consultas marcadas para o período da manhã (7hs-12hs) do dia 15/04/03
+\begin{align*}
+    \{ m.nome\ |\ & M\acute{e}dico(m)\ AND\ m.especialidade = "ortopedista"\ AND\\
+    & ((\exists c)(Consulta(c)\ AND\ c.CRM = m.CRM\ AND\\
+    & c.hora \geq 7\ AND\ c.hora \leq 12\ AND\ c.data = 15/04/03 )) \}
+\end{align*}
+
+\paragraph{12)} buscar os nomes dos pacientes, com consultas marcadas para o médicos João Carlos Santos, que estão com pneumonia
+\begin{align*}
+    \{ p.nome\ |\ & Paciente(p)\ AND\ p.doenca = "pneumonia"\ AND\ ((\exists c)(Consulta(c)\\
+    & AND\ p.RG = c.RG\ AND\ ((\exists m)(M\acute{e}dico(m)\ AND\\
+    & c.CRM = m.CRM\ AND\ m.nome = "Jo\tilde{a}o\ Carlos\ Santos")))) \}
+\end{align*}
+
+\paragraph{13)} buscar os nomes e RGs dos funcionários que recebem salários abaixo de R\$ 300,00 e que não estão internados como pacientes
+\begin{align*}
+    \{ f.RG, f.nome\ |\ & Funcion\acute{a}rios(f)\ AND\ f.sal\acute{a}rio < 300,00\ AND\\
+    & (NOT\ (\exists p)(Paciente(p)\ AND\ f.RG = p.RG)) \}
+\end{align*}
+
+\paragraph{14)} buscar os números dos ambulatórios onde nenhum médico dá atendimento
+\begin{align*}
+    \{ a.numeroA\ |\ & Ambulat\acute{o}rio(a)\ AND\\
+    & (NOT\ (\exists m)(M\acute{e}dico(m)\ AND\ a.numeroA = m.numeroA)) \}
+\end{align*}
+
+\paragraph{15)} buscar os nomes e RGs dos funcionários que estão internados como pacientes
+\begin{align*}
+    \{ f.nome, f.RG\ |\ & Funcion\acute{a}rio(f)\ AND\\
+    & ((\exists p)(Paciente(p)\ AND\ f.RG = p.RG)) \}
+\end{align*}
+
+\paragraph{16)} buscar o nome dos médicos que nunca consultaram
+\begin{align*}
+    \{ m.nome\ |\ & M\acute{e}dico(m)\ AND\\
+    & (NOT\ (\exists c)(Consulta(c)\ AND\ m.CRM = c.CRM)) \}
+\end{align*}
+
+\end{document}

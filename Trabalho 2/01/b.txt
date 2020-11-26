@@ -1,0 +1,13 @@
+π Animais.nome (
+    σ [Veterinários.nome = "Pedro Saúl de Lima" ∧ DATA_hora > "01/01/2017"] (
+        Θ [Veterinários.CRMV = Consultas.CRMV] (
+            Veterinários, Θ [Consultas.COD_AN = Animais.COD_AN] (Consultas, Animais)
+        )
+    )
+) ∩ π Animais.nome (
+    σ [Veterinários.nome = "Carlos Krank"] (
+        Θ [Veterinários.CRMV = Consultas.CRMV] (
+            Veterinários, Θ [Consultas.COD_AN = Animais.COD_AN] (Consultas, Animais)
+        )
+    )
+)

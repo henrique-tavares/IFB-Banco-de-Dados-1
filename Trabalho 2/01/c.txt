@@ -1,0 +1,3 @@
+π A1.nome (
+    σ [A1.cod_prop = π A2.cod_prop (σ [A2.COD_AN = 21] (Animais A2))] (Animais A1)
+)
